@@ -9,7 +9,7 @@ g++ -Wall -std=c++17 -O3 -march=native -fopenmp src/main.cpp -I src -o aes-singl
 ## Usage
 
 ```console
-aes-single-fault-attack plaintext regular_cipher faulted_cipher fault_position
+aes-single-fault-attack regular_cipher faulted_cipher fault_position [plaintext]
 ```
 
 ## Example
