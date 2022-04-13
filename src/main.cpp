@@ -38,18 +38,15 @@ void crack(string const& regular_ciphertext, string const& faulted_ciphertext, s
     auto Y_ = string_to_state(faulted_ciphertext);
 
     auto stage1_results = first_stage::reduction(Y, Y_, fault_position);
-    auto stage2_results = second_stage::reduction(Y, Y_, fault_position, stage1_results);
-
-    if (plaintext == "") {
-        for (auto const& key : stage2_results)
-            cout << key << endl;
-    } else {
+    auto keys = second_stage::reduction(Y, Y_, fault_position, stage1_results);
+    
+    if (plaintext != "") {
         auto X = string_to_state(plaintext);
-        auto stage3_results = third_stage::reduction(Y, X, stage2_results);
-
-        for (auto const& key : stage3_results)
-            cout << key << endl;
+        keys = third_stage::reduction(Y, X, keys);  
     }
+    
+    for (auto const& key : keys)
+            cout << key << endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -65,7 +62,7 @@ int main(int argc, char* argv[]) {
     istringstream(argv[2]) >> faulted_ciphertext;
     istringstream(argv[3]) >> fault_position;
     if (argc == 5) istringstream(argv[4]) >> plaintext;
-    
+
     // TODO: add checks to sanitize and validate input
     crack(regular_ciphertext, faulted_ciphertext, fault_position, plaintext);
 
