@@ -34,18 +34,23 @@ ostream& operator<<(ostream& os, FlatState const& state) {
 }
 
 void crack(string const& regular_ciphertext, string const& faulted_ciphertext, size_t fault_position, string const& plaintext = "") {
+    vector<FlatState> found_keys;
+    
     auto Y = string_to_state(regular_ciphertext);
     auto Y_ = string_to_state(faulted_ciphertext);
 
     auto stage1_results = first_stage::reduction(Y, Y_, fault_position);
-    auto keys = second_stage::reduction(Y, Y_, fault_position, stage1_results);
+    auto stage2_results = second_stage::reduction(Y, Y_, fault_position, stage1_results);
     
     if (plaintext != "") {
         auto X = string_to_state(plaintext);
-        keys = third_stage::reduction(Y, X, keys);  
+        found_keys = third_stage::reduction(Y, X, stage2_results);  
+    } else { 
+        for (auto key : stage2_results)
+            found_keys.push_back(get_initial_key(key));
     }
     
-    for (auto const& key : keys)
+    for (auto key : found_keys)
             cout << key << endl;
 }
 
@@ -53,7 +58,7 @@ int main(int argc, char* argv[]) {
     string regular_ciphertext, faulted_ciphertext, plaintext;
     size_t fault_position;
 
-    if (argc != 4 || argc != 5) {
+    if (argc != 4 && argc != 5) {
         cout << "Usage: aes-single-fault-attack regular_cipher faulted_cipher fault_position [plaintext]" << endl;
         return 1;
     }
