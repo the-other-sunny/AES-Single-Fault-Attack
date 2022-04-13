@@ -12,11 +12,20 @@ g++ -Wall -std=c++17 -O3 -march=native -fopenmp src/main.cpp -I src -o aes-singl
 aes-single-fault-attack regular_cipher faulted_cipher fault_position [plaintext]
 ```
 
-## Example
+## Examples
 
 ```console
-$ aes-single-fault-attack 01758006f6c57ea32b4e7d6d065f86f1 37c093ea09426cc92d0835b887de4306 45d4cf7faa60c648973ff03eb18aa2d3 8
+$ aes-single-fault-attack 37c093ea09426cc92d0835b887de4306 45d4cf7faa60c648973ff03eb18aa2d3 8 01758006f6c57ea32b4e7d6d065f86f1
 1e4229783f73e10991fd40d0779f98a6
+```
+
+```console
+$ aes-single-fault-attack 37c093ea09426cc92d0835b887de4306 45d4cf7faa60c648973ff03eb18aa2d3 8
+5757068142559a7bf4ced45caf7e0379
+b8e1bb4595c1eab82a8915ee75ab97fa
+...
+1e4229783f73e10991fd40d0779f98a6
+...
 ```
 ## Credits
 
