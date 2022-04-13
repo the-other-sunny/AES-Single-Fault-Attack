@@ -25,4 +25,4 @@ This project was inspired by the paper:
 [Differential Fault Analysis of the Advanced Encryption
 Standard using a Single Fault](https://eprint.iacr.org/2009/575.pdf)
 
-Although the first step described in the paper is implemented the exact same way here, the second one is done by partially decrypting the regular and fault cipher texts instead of solving the equations presented in the paper.
+Although the first step described in the paper is implemented the exact same way here, the second one is done by partially decrypting the regular and faulted ciphers instead of solving the equations presented in the paper.
