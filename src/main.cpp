@@ -50,7 +50,7 @@ void crack(string const& regular_ciphertext, string const& faulted_ciphertext, s
 }
 
 int main(int argc, char* argv[]) {
-    string plaintext, regular_ciphertext, faulted_ciphertext;
+    string regular_ciphertext, faulted_ciphertext, plaintext;
     size_t fault_position;
 
     if (argc != 4 || argc != 5) {
