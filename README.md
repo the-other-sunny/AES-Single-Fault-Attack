@@ -1,5 +1,15 @@
 # AES-Single-Fault-Attack
 
+## Overview
+
+A tool to perform differential fault analysis on `AES-128`.
+
+The fault is supposed to be injected at round 8 entry (or anywhere between round 7 `MixColumns` output and round 8 `MixColumns` input as it can be brought back to the round 8 entry situation by adapting the fault position).
+
+The key search space is first reduced to 258 possibilities (on average) with the help of the regular cipher, the faulted cipher and the fault position.
+
+Providing the plaintext will lead to a further reduction into a single key.  
+
 ## Compilation
 
 ```console
@@ -10,6 +20,17 @@ g++ -Wall -std=c++17 -O3 -march=native -fopenmp src/main.cpp -I src -o aes-singl
 
 ```console
 aes-single-fault-attack regular_cipher faulted_cipher fault_position [plaintext]
+```
+
+The regular cipher, faulted cipher and plaintext are provided as 32 characters long big endian hex strings.  
+
+The fault position is 0-based and follow row-major order as depicted below:  
+
+```text
+0 4  8 12
+1 5  9 13
+2 6 10 14
+3 7 11 15
 ```
 
 ## Examples
