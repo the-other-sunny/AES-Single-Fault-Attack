@@ -5,11 +5,11 @@
 A tool to perform differential fault analysis on `AES-128`.
 
 The fault is supposed to be injected at round 8 entry.  
-(Or, actually, anywhere between round 7 `MixColumns` output and round 8 `MixColumns` input as it can be brought back to the round 8 entry situation by adapting the fault position)
+(Or, really, anywhere between round 7 `MixColumns` output and round 8 `MixColumns` input as it can be brought back to the round 8 entry situation by adapting the fault position)
 
 The key search space is first reduced to 258 candidates (on average) with the help of the regular cipher, the faulted cipher and the fault position.
 
-Providing the plaintext will allow reducing the search space further to a single key.  
+Providing the plaintext allows further reduction to a single key - the one you're looking for ;) -.  
 
 ## Compilation
 
