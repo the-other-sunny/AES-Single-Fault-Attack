@@ -4,11 +4,12 @@
 
 A tool to perform differential fault analysis on `AES-128`.
 
-The fault is supposed to be injected at round 8 entry (or anywhere between round 7 `MixColumns` output and round 8 `MixColumns` input as it can be brought back to the round 8 entry situation by adapting the fault position).
+The fault is supposed to be injected at round 8 entry.  
+(Or, actually, anywhere between round 7 `MixColumns` output and round 8 `MixColumns` input as it can be brought back to the round 8 entry situation by adapting the fault position)
 
-The key search space is first reduced to 258 possibilities (on average) with the help of the regular cipher, the faulted cipher and the fault position.
+The key search space is first reduced to 258 candidates (on average) with the help of the regular cipher, the faulted cipher and the fault position.
 
-Providing the plaintext will lead to a further reduction into a single key.  
+Providing the plaintext will allow reducing the search space further to a single key.  
 
 ## Compilation
 
@@ -22,7 +23,7 @@ g++ -Wall -std=c++17 -O3 -march=native -fopenmp src/main.cpp -I src -o aes-singl
 aes-single-fault-attack regular_cipher faulted_cipher fault_position [plaintext]
 ```
 
-The regular cipher, faulted cipher and plaintext are provided as 32 characters long big endian hex strings.  
+The regular cipher, faulted cipher and plaintext are provided as 32 characters big endian hex strings.  
 
 The fault position is 0-based and follow row-major order as depicted below:  
 
@@ -57,4 +58,4 @@ This project was inspired by the paper:
 [Differential Fault Analysis of the Advanced Encryption
 Standard using a Single Fault](https://eprint.iacr.org/2009/575.pdf)
 
-Although the first step described in the paper is implemented the exact same way here, the second one is done by partially decrypting the regular and faulted ciphers instead of solving the equations presented in the paper.
+Although the first step described in the paper is implemented as is, the second one is conducted here by partially decrypting the regular and faulted ciphers instead of solving the equations presented in the paper.
