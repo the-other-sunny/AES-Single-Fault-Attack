@@ -23,7 +23,7 @@ g++ -Wall -std=c++17 -O3 -march=native -fopenmp src/main.cpp -I src -o aes-singl
 aes-single-fault-attack regular_cipher faulted_cipher fault_position [plaintext]
 ```
 
-The regular cipher, faulted cipher and plaintext are provided as 32 characters big endian hex strings.  
+The regular cipher, faulted cipher and plaintext are provided as 32 characters little endian hex strings.  
 
 The fault position is 0-based and follow row-major order as depicted below:  
 
